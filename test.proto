@@ -1,0 +1,36 @@
+syntax = "proto2";
+package myTestTable;
+import "tcaplusservice.optionv1.proto";
+message tb_test01{
+option(tcaplusservice.tcaplus_primary_key)="uin,name,region,gamesvrid";// 主键
+option(tcaplusservice.tcaplus_index)="index_1(uin,region)";     // 索引键
+option(tcaplusservice.tcaplus_index)="index_1(uin,name)";
+option(tcaplusservice.tcaplus_cipher_md5)= "62fee3b53619b7f303c939964c6f2c4b";  // 默认加密
+required int32 uin =1;
+required string name= 2;
+required int32 region=3;
+required int32 gamesvrid=4;
+optional int32 logintime = 5 [default = 1];
+repeated int64 lockid = 6 [packed = true];
+optional bool is_Active = 7 [default = false]; 
+optional pay_Money money= 8 ;
+}
+message pay_Money {
+required int32 boyNum=1;
+optional string boyName=2;
+optional bool is_Yang=3[default=true];
+message girl{
+required string name=1[(tcaplusservice.tcaplus_crypto)=true];// 加密
+optional int32 age=2;
+}
+}
+message change_money{
+optional pay_Money.girl other_girl=1;
+message boy{
+  required int32 num = 1;
+  message cat{
+          required int32 maxNum=1;
+          required int32 minNum=2; 
+  }
+}
+}
